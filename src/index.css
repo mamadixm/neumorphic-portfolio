@@ -1,39 +1,36 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Vazirmatn:wght@300;400;500;600;700;800&display=swap');
 
-:root {
-  --bg-color: #e6ecf5;
-  --text-main: #2d3748;
-  --text-muted: #718096;
-}
-
-.dark {
-  --bg-color: #1a1e24;
-  --text-main: #e2e8f0;
-  --text-muted: #94a3b8;
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 body {
-  margin: 0;
-  background-color: var(--bg-color);
-  color: var(--text-main);
-  font-family: 'Vazirmatn', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  font-family: 'Vazirmatn', 'Plus Jakarta Sans', system-ui, sans-serif;
   transition: background-color 0.3s ease, color 0.3s ease;
   overflow-x: hidden;
 }
 
-/* اسکرول‌بار نرم و نئومورفیک */
-::-webkit-scrollbar {
-  width: 10px;
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  outline: none;
 }
-::-webkit-scrollbar-track {
-  background: var(--bg-color);
+
+input, textarea {
+  font-family: inherit;
+  border: none;
+  outline: none;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
 }
 ::-webkit-scrollbar-thumb {
   background: #cbd5e1;
-  border-radius: 5px;
-}
-.dark ::-webkit-scrollbar-thumb {
-  background: #334155;
+  border-radius: 4px;
 }

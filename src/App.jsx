@@ -1,306 +1,251 @@
 import React, { useState, useEffect } from 'react';
 import { 
-  Sun, Moon, Globe, Github, Linkedin, Mail, Download, 
-  ExternalLink, Code2, Briefcase, GraduationCap, Send, 
-  CheckCircle2, Sparkles, User, Layers, ArrowUpRight 
+  Sun, Moon, Globe, Mail, Download, 
+  Code2, Briefcase, Send, CheckCircle2, 
+  Layers, ArrowUpRight, X, Cpu, Bot
 } from 'lucide-react';
+import './App.css';
+import profileImg from './assets/profile.jpg';
 
 export default function App() {
   const [darkMode, setDarkMode] = useState(false);
-  const [lang, setLang] = useState('fa'); // 'fa' | 'en'
-  const [activeTab, setActiveTab] = useState('all');
+  const [lang, setLang] = useState('fa');
   const [selectedProject, setSelectedProject] = useState(null);
   const [formSent, setFormSent] = useState(false);
 
-  // هماهنگ‌سازی جهت صفحه با زبان
   useEffect(() => {
     document.documentElement.dir = lang === 'fa' ? 'rtl' : 'ltr';
     document.documentElement.lang = lang;
   }, [lang]);
 
-  // استایل‌های نئومورفیک برای لایت و دارک
-  const neuStyles = {
-    convex: darkMode
-      ? {
-          background: '#1a1e24',
-          boxShadow: '8px 8px 16px #121519, -8px -8px 16px #22272f'
-        }
-      : {
-          background: '#e6ecf5',
-          boxShadow: '8px 8px 18px #c2c9d2, -8px -8px 18px #ffffff'
-        },
-    convexSm: darkMode
-      ? {
-          background: '#1a1e24',
-          boxShadow: '4px 4px 10px #121519, -4px -4px 10px #22272f'
-        }
-      : {
-          background: '#e6ecf5',
-          boxShadow: '4px 4px 10px #c2c9d2, -4px -4px 10px #ffffff'
-        },
-    inset: darkMode
-      ? {
-          background: '#171a20',
-          boxShadow: 'inset 4px 4px 8px #101217, inset -4px -4px 8px #1e2229'
-        }
-      : {
-          background: '#dde3ec',
-          boxShadow: 'inset 4px 4px 8px #c4cbd5, inset -4px -4px 8px #f6fbff'
-        },
-    pressed: darkMode
-      ? {
-          background: '#181b21',
-          boxShadow: 'inset 2px 2px 5px #111418, inset -2px -2px 5px #20242b',
-          color: '#60a5fa'
-        }
-      : {
-          background: '#dde3ec',
-          boxShadow: 'inset 2px 2px 5px #c2c9d2, inset -2px -2px 5px #ffffff',
-          color: '#2563eb'
-        }
-  };
-
   const t = {
     fa: {
-      name: "محمد",
-      role: "توسعه‌دهنده فرانت‌اند و طراح رابط کاربری",
-      bio: "علاقه‌مند به ساخت تجربه‌های وب مدرن با ترکیب زیبایی‌شناسی نئومورفیسم، کارایی بالا و کدهای تمیز.",
+      name: "محمدمهدی فراهانی",
+      role: "توسعه‌دهنده فول‌استک (Full-Stack Developer)",
+      bio: "علاقه‌مند و فعال در حوزه‌های رباتیک، هوش مصنوعی و اتوماسیون صنعتی. تمرکز روی ساخت سیستم‌های نرم‌افزاری هوشمند، تعاملات مدرن وب و معماری مقیاس‌پذیر.",
       downloadCV: "دانلود رزومه",
       contactMe: "ارتباط با من",
-      skills: "مهارت‌های فنی",
-      projects: "پروژه‌ها",
-      experience: "سوابق و تجربیات",
+      skills: "مهارت‌های تخصصی",
+      projects: "پروژه‌های منتخب",
+      experience: "سوابق و حوزه‌های فعالیت",
       contact: "ارسال پیام",
-      all: "همه",
       preview: "مشاهده جزئیات",
       sendBtn: "ارسال پیام",
-      msgSent: "پیام شما با موفقیت ثبت شد!",
-      available: "آماده برای همکاری در پروژه‌های جدید"
+      msgSent: "پیام شما دریافت شد! به زودی پاسخ می‌دهم.",
+      available: "آماده برای پروژه‌های هوش مصنوعی و توسعه نرم‌افزار",
+      namePlaceholder: "نام شما",
+      emailPlaceholder: "ایمیل شما",
+      msgPlaceholder: "متن پیام شما...",
+      close: "بستن",
     },
     en: {
-      name: "Mohammad",
-      role: "Frontend Developer & UI/UX Designer",
-      bio: "Passionate about crafting tactile web experiences blending Neumorphic aesthetics, peak performance, and clean code.",
+      name: "Mohammad Mehdi Farahani",
+      role: "Full-Stack Developer",
+      bio: "Passionate about Robotics, Artificial Intelligence, and Industrial Automation. Specializing in intelligent software systems, modern web architectures, and scalable full-stack applications.",
       downloadCV: "Download CV",
       contactMe: "Get in Touch",
-      skills: "Technical Skills",
-      projects: "Featured Projects",
-      experience: "Work & Education",
-      contact: "Contact Me",
-      all: "All",
+      skills: "Core Expertise",
+      projects: "Featured Works",
+      experience: "Experience & Focus",
+      contact: "Drop a Message",
       preview: "View Details",
       sendBtn: "Send Message",
-      msgSent: "Message successfully recorded!",
-      available: "Available for new projects & opportunities"
+      msgSent: "Message recorded! I will reply soon.",
+      available: "Available for AI & Software Projects",
+      namePlaceholder: "Your Name",
+      emailPlaceholder: "Your Email",
+      msgPlaceholder: "Your Message...",
+      close: "Close",
     }
   }[lang];
 
   const skills = [
-    { name: "React / Next.js", level: 92, cat: "frontend" },
-    { name: "JavaScript / TypeScript", level: 88, cat: "frontend" },
-    { name: "Tailwind CSS / Neumorphism", level: 95, cat: "design" },
-    { name: "Git / GitHub Workflow", level: 85, cat: "tools" },
-    { name: "UI/UX & Figma", level: 80, cat: "design" },
-    { name: "REST APIs & State Management", level: 86, cat: "frontend" }
+    { name: "Full-Stack Development (React, Node.js, Python)", level: 92 },
+    { name: "Artificial Intelligence & Machine Learning", level: 86 },
+    { name: "Robotics & Hardware Integration", level: 84 },
+    { name: "Industrial Automation Systems", level: 80 },
+    { name: "API Architecture & Databases (SQL/NoSQL)", level: 88 },
+    { name: "UI/UX & Neumorphic Design", level: 90 },
   ];
 
   const projects = [
     {
       id: 1,
-      title: lang === 'fa' ? "داشبورد مالی Soft UI" : "Neumorphic Crypto & Finance Dashboard",
-      desc: lang === 'fa' ? "پنل مدیریت دارایی‌های دیجیتال با المان‌های برجسته و انیمیشن‌های روان." : "Tactile digital asset manager with soft cards and real-time updates.",
-      tags: ["React", "Tailwind", "Soft UI"],
-      cat: "web"
+      title: lang === 'fa' ? "سیستم نظارت و اتوماسیون هوشمند" : "Smart Automation Monitoring Platform",
+      desc: lang === 'fa' ? "پلتفرم جمع‌آوری داده‌های سنسورها و کنترل تجهیزات صنعتی با داشبورد تعاملی تحت وب و تحلیل داده." : "Industrial telemetry and automation dashboard monitoring sensor data in real-time.",
+      tags: ["Python", "React", "Automation", "IoT"],
     },
     {
       id: 2,
-      title: lang === 'fa' ? "پلتفرم ابری Task Flow" : "Minimalist Task Flow",
-      desc: lang === 'fa' ? "سیستم مدیریت تسک تیمی با قابلیت درگ‌اند-دراپ و گزارش‌گیری پیشرفته." : "Collaborative task manager featuring soft inset dropzones and live tracking.",
-      tags: ["Next.js", "Zustand", "TypeScript"],
-      cat: "app"
+      title: lang === 'fa' ? "موتور پردازش داده و بینایی ماشین رباتیک" : "Robotics Vision & Control Pipeline",
+      desc: lang === 'fa' ? "پیاده‌سازی پایپ‌لاین تشخیص اشیاء و کنترل موقعیت برای بازوهای رباتیک با هوش مصنوعی." : "Computer vision pipeline for robotic manipulation, object tracking, and spatial kinematics.",
+      tags: ["AI / ML", "Computer Vision", "Robotics"],
     },
     {
       id: 3,
-      title: lang === 'fa' ? "کامپوننت‌های نئومورفیک React" : "React Neumorphic Kit",
-      desc: lang === 'fa' ? "مجموعه کامپوننت‌های در دسترس و بازمتن با تمرکز روی میکرواینترکشن‌ها." : "Open-source accessible UI library implementing tactile dual-shadow paradigms.",
-      tags: ["React", "CSS Modules", "NPM"],
-      cat: "lib"
+      title: lang === 'fa' ? "داشبورد نئومورفیک تحت وب" : "Neumorphic Control Center",
+      desc: lang === 'fa' ? "رابط کاربری نرم و مدرن برای مدیریت لاگ‌ها و دستورات رباتیک با تجربه کاربری تعاملی." : "Tactile Soft UI web application for real-time robotic telemetry and command dispatching.",
+      tags: ["Full-Stack", "Soft UI", "WebSocket"],
     }
   ];
 
   const timeline = [
     {
       year: "2024 - اکنون",
-      title: lang === 'fa' ? "توسعه‌دهنده ارشد فرانت‌اند" : "Senior Frontend Developer",
-      subtitle: lang === 'fa' ? "تیم محصول / ریموت" : "Product Team / Remote",
-      desc: lang === 'fa' ? "طراحی و توسعه معماری فرانت‌اند اپلیکیشن‌های تحت وب با ری‌اکت و تیلویند." : "Spearheading modern component design systems and web performance optimization."
+      title: lang === 'fa' ? "توسعه‌دهنده نرم‌افزار و هوش مصنوعی" : "Software & AI Developer",
+      company: lang === 'fa' ? "پروژه‌های اتوماسیون و رباتیک" : "Automation & Robotics Projects",
+      desc: lang === 'fa' ? "توسعه سیستم‌های نرم‌افزاری متصل به کنترلرها و پیاده‌سازی سرویس‌های هوش مصنوعی." : "Architecting software interfaces for industrial hardware and intelligent data systems."
     },
     {
       year: "2022 - 2024",
-      title: lang === 'fa' ? "توسعه‌دهنده وب و UI" : "Web & UI Developer",
-      subtitle: lang === 'fa' ? "استودیو نرم‌افزار" : "Software Studio",
-      desc: lang === 'fa' ? "پیاده‌سازی رابط‌های کاربری مدرن، ریسپانسیو و بهینه‌سازی تجربه کاربر." : "Implemented high-fidelity design systems and responsive user interfaces."
+      title: lang === 'fa' ? "توسعه‌دهنده فول‌استک و وب" : "Full-Stack & Web Developer",
+      company: lang === 'fa' ? "طراحی و مهندسی سیستم‌ها" : "Systems Engineering & Web",
+      desc: lang === 'fa' ? "پیاده‌سازی سامانه‌های تحت وب با معماری ماژولار و رابط‌های کاربری تعاملی." : "Building responsive web platforms, backend APIs, and tactile user experiences."
     }
   ];
 
   return (
-    <div className={`min-h-screen py-10 px-4 sm:px-8 transition-colors duration-300 ${darkMode ? 'dark' : ''}`}>
-      <div className="max-w-5xl mx-auto space-y-14">
+    <div className={`portfolio-container ${darkMode ? 'dark' : ''}`}>
+      <div className="portfolio-wrapper">
         
-        {/* نوار بالایی و تنظیمات (Header Bar) */}
-        <header className="flex justify-between items-center p-4 rounded-2xl transition-all" style={neuStyles.convex}>
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl flex items-center justify-center font-bold text-lg text-blue-500" style={neuStyles.inset}>
-              M
+        {/* Navigation Bar */}
+        <header className="neu-convex header-bar">
+          <div className="header-brand">
+            <div className="neu-inset header-avatar">
+              MF
             </div>
-            <span className="font-extrabold text-lg tracking-tight">{t.name}</span>
+            <span className="header-title">{t.name}</span>
           </div>
 
-          <div className="flex items-center gap-3">
-            {/* دکمه زبان */}
-            <button
+          <div className="header-actions">
+            <button 
               onClick={() => setLang(lang === 'fa' ? 'en' : 'fa')}
-              className="p-3 rounded-xl flex items-center gap-1.5 text-sm font-semibold transition active:scale-95"
-              style={neuStyles.convexSm}
-              title="تغییر زبان"
+              className="neu-convex-sm btn-lang"
             >
-              <Globe size={18} className="text-blue-500" />
+              <Globe size={16} color="var(--accent-color)" />
               <span>{lang === 'fa' ? 'EN' : 'فا'}</span>
             </button>
 
-            {/* دکمه تم لایت / دارک */}
-            <button
+            <button 
               onClick={() => setDarkMode(!darkMode)}
-              className="p-3 rounded-xl transition active:scale-95 text-amber-500 dark:text-blue-400"
-              style={neuStyles.convexSm}
-              title="تغییر تم"
+              className="neu-convex-sm btn-theme"
             >
-              {darkMode ? <Sun size={19} /> : <Moon size={19} />}
+              {darkMode ? <Sun size={18} color="#f59e0b" /> : <Moon size={18} color="#3b82f6" />}
             </button>
           </div>
         </header>
 
-        {/* بخش معرفی (Hero Section) */}
-        <section className="p-8 sm:p-12 rounded-3xl transition-all" style={neuStyles.convex}>
-          <div className="flex flex-col md:flex-row items-center gap-8 justify-between">
-            <div className="space-y-5 text-center md:text-start flex-1">
-              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold text-emerald-600 dark:text-emerald-400" style={neuStyles.inset}>
-                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                {t.available}
-              </div>
-              <h1 className="text-3xl sm:text-5xl font-black leading-tight">
-                {t.name}
-              </h1>
-              <p className="text-lg sm:text-xl font-medium text-blue-600 dark:text-blue-400">
-                {t.role}
-              </p>
-              <p className="text-slate-600 dark:text-slate-400 leading-relaxed max-w-xl">
-                {t.bio}
-              </p>
-
-              {/* اکشن‌ها و شبکه‌های اجتماعی */}
-              <div className="flex flex-wrap items-center justify-center md:justify-start gap-4 pt-3">
-                <a
-                  href="#contact"
-                  className="px-6 py-3 rounded-2xl font-bold text-sm text-blue-600 dark:text-blue-400 transition active:scale-95 flex items-center gap-2"
-                  style={neuStyles.convexSm}
-                >
-                  <Send size={16} />
-                  {t.contactMe}
-                </a>
-                <button
-                  onClick={() => alert('لینک رزومه فایل PDF را اینجا قرار دهید.')}
-                  className="px-6 py-3 rounded-2xl font-bold text-sm transition active:scale-95 flex items-center gap-2"
-                  style={neuStyles.convexSm}
-                >
-                  <Download size={16} />
-                  {t.downloadCV}
-                </button>
-                <div className="flex items-center gap-2">
-                  <a href="https://github.com/mamadixm" target="_blank" rel="noreferrer" className="p-3 rounded-xl transition" style={neuStyles.convexSm}>
-                    <Github size={18} />
-                  </a>
-                  <a href="mailto:your-email@example.com" className="p-3 rounded-xl transition" style={neuStyles.convexSm}>
-                    <Mail size={18} />
-                  </a>
-                </div>
-              </div>
+        {/* Hero Section */}
+        <section className="neu-convex hero-section">
+          <div className="hero-info">
+            <div className="neu-inset badge-available">
+              <span className="status-dot"></span>
+              {t.available}
             </div>
+            <h1 className="hero-title">{t.name}</h1>
+            <p className="hero-role">{t.role}</p>
+            <p className="hero-bio">{t.bio}</p>
 
-            {/* آواتار نئومورفیک */}
-            <div className="w-48 h-48 sm:w-56 sm:h-56 rounded-full p-4 flex items-center justify-center transition-all" style={neuStyles.convex}>
-              <div className="w-full h-full rounded-full flex flex-col items-center justify-center text-center p-4" style={neuStyles.inset}>
-                <Sparkles size={40} className="text-blue-500 mb-2 animate-bounce" />
-                <span className="font-bold text-xs uppercase tracking-wider text-slate-500">Soft UI Portfolio</span>
-              </div>
+            <div className="hero-actions">
+              <a href="#contact" className="neu-convex-sm btn-action btn-primary">
+                <Send size={16} />
+                {t.contactMe}
+              </a>
+              <button 
+                onClick={() => alert('Download link for CV goes here.')}
+                className="neu-convex-sm btn-action"
+              >
+                <Download size={16} />
+                {t.downloadCV}
+              </button>
+              <a 
+                href="https://github.com/mamadixm" 
+                target="_blank" 
+                rel="noreferrer"
+                title="GitHub"
+                className="neu-convex-sm btn-icon"
+              >
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                  <path fillRule="evenodd" clipRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
+                </svg>
+              </a>
             </div>
+          </div>
+
+          {/* Profile Picture with Circular Neumorphic Frame */}
+          <div className="neu-convex profile-frame-outer">
+            <div className="neu-inset profile-frame-inner">
+              <img 
+                src={profileImg} 
+                alt="Mohammad Mehdi Farahani" 
+                className="profile-img"
+              />
+            </div>
+            <div className="profile-live-indicator" title="Active & Available" />
           </div>
         </section>
 
-        {/* مهارت‌ها (Skills Section) */}
-        <section className="space-y-6">
-          <div className="flex items-center gap-3">
-            <div className="p-2.5 rounded-xl text-blue-500" style={neuStyles.convexSm}>
-              <Code2 size={20} />
+        {/* Skills Section */}
+        <section className="section-wrapper">
+          <div className="section-header">
+            <div className="neu-convex-sm section-icon-box">
+              <Cpu size={20} color="var(--accent-color)" />
             </div>
-            <h2 className="text-2xl font-bold">{t.skills}</h2>
+            <h2 className="section-title">{t.skills}</h2>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-            {skills.map((skill, idx) => (
-              <div key={idx} className="p-5 rounded-2xl space-y-3" style={neuStyles.convex}>
-                <div className="flex justify-between items-center text-sm font-bold">
+          <div className="skills-grid">
+            {skills.map((skill, index) => (
+              <div key={index} className="neu-convex skill-card">
+                <div className="skill-info">
                   <span>{skill.name}</span>
-                  <span className="text-blue-500">{skill.level}%</span>
+                  <span className="skill-percent">{skill.level}%</span>
                 </div>
-                {/* پروگرس بار فرورفته */}
-                <div className="w-full h-3 rounded-full overflow-hidden p-0.5" style={neuStyles.inset}>
+                <div className="neu-inset progress-track">
                   <div 
-                    className="h-full rounded-full bg-gradient-to-r from-blue-500 to-indigo-500 transition-all duration-1000"
+                    className="progress-bar"
                     style={{ width: `${skill.level}%` }}
-                  ></div>
+                  />
                 </div>
               </div>
             ))}
           </div>
         </section>
 
-        {/* پروژه‌ها (Projects Section) */}
-        <section className="space-y-6">
-          <div className="flex items-center gap-3">
-            <div className="p-2.5 rounded-xl text-blue-500" style={neuStyles.convexSm}>
-              <Layers size={20} />
+        {/* Projects Section */}
+        <section className="section-wrapper">
+          <div className="section-header">
+            <div className="neu-convex-sm section-icon-box">
+              <Bot size={20} color="var(--accent-color)" />
             </div>
-            <h2 className="text-2xl font-bold">{t.projects}</h2>
+            <h2 className="section-title">{t.projects}</h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="projects-grid">
             {projects.map((proj) => (
-              <div key={proj.id} className="p-6 rounded-3xl flex flex-col justify-between space-y-4" style={neuStyles.convex}>
-                <div className="space-y-3">
-                  <div className="w-12 h-12 rounded-2xl flex items-center justify-center text-blue-500" style={neuStyles.inset}>
-                    <Code2 size={22} />
+              <div key={proj.id} className="neu-convex project-card">
+                <div>
+                  <div className="neu-inset project-icon-box">
+                    <Code2 size={20} />
                   </div>
-                  <h3 className="text-lg font-bold">{proj.title}</h3>
-                  <p className="text-sm text-slate-500 leading-relaxed">{proj.desc}</p>
+                  <h3 className="project-name" style={{ marginTop: 12 }}>{proj.title}</h3>
+                  <p className="project-desc" style={{ marginTop: 8 }}>{proj.desc}</p>
                 </div>
-                
-                <div className="space-y-4 pt-2">
-                  <div className="flex flex-wrap gap-2">
+
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+                  <div className="project-tags">
                     {proj.tags.map((tag, i) => (
-                      <span key={i} className="text-xs px-2.5 py-1 rounded-lg font-medium" style={neuStyles.inset}>
+                      <span key={i} className="neu-inset project-tag">
                         {tag}
                       </span>
                     ))}
                   </div>
-
-                  <button
+                  <button 
                     onClick={() => setSelectedProject(proj)}
-                    className="w-full py-2.5 rounded-xl font-semibold text-xs text-blue-600 dark:text-blue-400 flex items-center justify-center gap-1.5 transition active:scale-95"
-                    style={neuStyles.convexSm}
+                    className="neu-convex-sm btn-project-preview"
                   >
                     <span>{t.preview}</span>
-                    <ArrowUpRight size={14} />
+                    <ArrowUpRight size={15} />
                   </button>
                 </div>
               </div>
@@ -308,40 +253,39 @@ export default function App() {
           </div>
         </section>
 
-        {/* سوابق و خط زمان (Timeline) */}
-        <section className="space-y-6">
-          <div className="flex items-center gap-3">
-            <div className="p-2.5 rounded-xl text-blue-500" style={neuStyles.convexSm}>
-              <Briefcase size={20} />
+        {/* Experience Timeline */}
+        <section className="section-wrapper">
+          <div className="section-header">
+            <div className="neu-convex-sm section-icon-box">
+              <Briefcase size={20} color="var(--accent-color)" />
             </div>
-            <h2 className="text-2xl font-bold">{t.experience}</h2>
+            <h2 className="section-title">{t.experience}</h2>
           </div>
 
-          <div className="p-8 rounded-3xl space-y-8" style={neuStyles.convex}>
+          <div className="neu-convex timeline-card">
             {timeline.map((item, idx) => (
-              <div key={idx} className="relative ps-6 border-s-2 border-slate-300 dark:border-slate-700 space-y-1">
-                <div className="absolute -start-[9px] top-1 w-4 h-4 rounded-full bg-blue-500 shadow-md"></div>
-                <span className="text-xs font-bold text-blue-500 uppercase">{item.year}</span>
-                <h4 className="text-base font-bold">{item.title}</h4>
-                <div className="text-xs font-semibold text-slate-400">{item.subtitle}</div>
-                <p className="text-sm text-slate-500 pt-1">{item.desc}</p>
+              <div key={idx} className="timeline-item">
+                <span className="timeline-year">{item.year}</span>
+                <h4 className="timeline-title">{item.title}</h4>
+                <div className="timeline-company">{item.company}</div>
+                <p className="timeline-desc">{item.desc}</p>
               </div>
             ))}
           </div>
         </section>
 
-        {/* فرم ارتباط با من (Contact Section) */}
-        <section id="contact" className="space-y-6">
-          <div className="flex items-center gap-3">
-            <div className="p-2.5 rounded-xl text-blue-500" style={neuStyles.convexSm}>
-              <Mail size={20} />
+        {/* Contact Form */}
+        <section id="contact" className="section-wrapper">
+          <div className="section-header">
+            <div className="neu-convex-sm section-icon-box">
+              <Mail size={20} color="var(--accent-color)" />
             </div>
-            <h2 className="text-2xl font-bold">{t.contact}</h2>
+            <h2 className="section-title">{t.contact}</h2>
           </div>
 
-          <div className="p-8 sm:p-10 rounded-3xl" style={neuStyles.convex}>
+          <div className="neu-convex contact-card">
             {formSent ? (
-              <div className="p-6 rounded-2xl flex items-center gap-3 text-emerald-600 dark:text-emerald-400 font-bold text-sm" style={neuStyles.inset}>
+              <div className="neu-inset contact-success">
                 <CheckCircle2 size={24} />
                 <span>{t.msgSent}</span>
               </div>
@@ -352,35 +296,31 @@ export default function App() {
                   setFormSent(true);
                   setTimeout(() => setFormSent(false), 5000);
                 }}
-                className="space-y-5"
+                className="contact-form"
               >
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                  <input
-                    type="text"
-                    required
-                    placeholder={lang === 'fa' ? "نام شما" : "Your Name"}
-                    className="w-full p-4 rounded-2xl text-sm outline-none bg-transparent transition"
-                    style={neuStyles.inset}
+                <div className="contact-row">
+                  <input 
+                    type="text" 
+                    required 
+                    placeholder={t.namePlaceholder}
+                    className="neu-inset form-input"
                   />
-                  <input
-                    type="email"
-                    required
-                    placeholder={lang === 'fa' ? "ایمیل شما" : "Your Email"}
-                    className="w-full p-4 rounded-2xl text-sm outline-none bg-transparent transition"
-                    style={neuStyles.inset}
+                  <input 
+                    type="email" 
+                    required 
+                    placeholder={t.emailPlaceholder}
+                    className="neu-inset form-input"
                   />
                 </div>
-                <textarea
-                  rows="4"
-                  required
-                  placeholder={lang === 'fa' ? "متن پیام..." : "Your Message..."}
-                  className="w-full p-4 rounded-2xl text-sm outline-none bg-transparent transition resize-none"
-                  style={neuStyles.inset}
-                ></textarea>
-                <button
+                <textarea 
+                  rows={4} 
+                  required 
+                  placeholder={t.msgPlaceholder}
+                  className="neu-inset form-textarea"
+                />
+                <button 
                   type="submit"
-                  className="px-8 py-3.5 rounded-2xl font-bold text-sm text-blue-600 dark:text-blue-400 flex items-center gap-2 transition active:scale-95"
-                  style={neuStyles.convexSm}
+                  className="neu-convex-sm btn-submit"
                 >
                   <Send size={16} />
                   <span>{t.sendBtn}</span>
@@ -390,46 +330,42 @@ export default function App() {
           </div>
         </section>
 
-        {/* فوتر */}
-        <footer className="text-center py-6 text-xs text-slate-500">
-          Designed & Built with Soft UI Neumorphism • {new Date().getFullYear()}
+        {/* Footer */}
+        <footer className="portfolio-footer">
+          Designed with Neumorphism Soft UI • {new Date().getFullYear()}
         </footer>
 
       </div>
 
-      {/* مودال جزئیات پروژه */}
+      {/* Project Detail Modal */}
       {selectedProject && (
-        <div className="fixed inset-0 bg-black/40 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="max-w-md w-full p-8 rounded-3xl space-y-4 animate-in fade-in zoom-in duration-200" style={neuStyles.convex}>
-            <div className="flex justify-between items-start">
-              <h3 className="text-xl font-bold">{selectedProject.title}</h3>
+        <div className="modal-overlay">
+          <div className="neu-convex modal-box">
+            <div className="modal-header">
+              <h3 style={{ fontSize: 18, fontWeight: 800 }}>{selectedProject.title}</h3>
               <button 
                 onClick={() => setSelectedProject(null)}
-                className="w-8 h-8 rounded-full flex items-center justify-center font-bold text-slate-400"
-                style={neuStyles.convexSm}
+                className="neu-convex-sm btn-close-modal"
               >
-                ✕
+                <X size={16} />
               </button>
             </div>
-            <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+            <p style={{ color: 'var(--text-muted)', fontSize: 14, lineHeight: 1.8 }}>
               {selectedProject.desc}
             </p>
-            <div className="flex flex-wrap gap-2 pt-2">
+            <div className="project-tags">
               {selectedProject.tags.map((tag, i) => (
-                <span key={i} className="text-xs px-3 py-1 rounded-lg font-semibold" style={neuStyles.inset}>
+                <span key={i} className="neu-inset project-tag">
                   {tag}
                 </span>
               ))}
             </div>
-            <div className="pt-4 flex gap-3">
-              <button
-                onClick={() => setSelectedProject(null)}
-                className="flex-1 py-2.5 rounded-xl font-bold text-xs"
-                style={neuStyles.convexSm}
-              >
-                {lang === 'fa' ? 'بستن' : 'Close'}
-              </button>
-            </div>
+            <button 
+              onClick={() => setSelectedProject(null)}
+              className="neu-convex-sm modal-btn-action"
+            >
+              {t.close}
+            </button>
           </div>
         </div>
       )}
